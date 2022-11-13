@@ -38,11 +38,12 @@
 				</div>
 			</div>
 		</div>
-		{{!-- <div class="c-item controller">
+		<div class="c-item controller">
+			
 			<div>
-				<a href="/teacher/addHomework?className={{class}}">Add Assignment</a>
+				<a href="/teacher/mark?title={{assignment.title}}">Mark</a>
 			</div>
-		</div> --}}
+		</div>
 		<div class="c-item body">
 				
 				Title: {{assignment.title}} <br>
@@ -50,15 +51,7 @@
 				<a style="color: blue;" href="/downloadzipp?filename={{filename}}">{{filename}}</a> <br>
 				{{/each}}
 				<br>
-				Student Summited Assignment: <br>
-				{{#each assignment.submitAss}}
-						{{student}}: 
-						{{#each file}}
-						<a style="color: blue;" href="/downloadzipp?filename={{filename}}">{{filename}}</a>
-						<br>
-						{{/each}}
-						<br>
-				{{/each}}
+				
 				<br>
 			{{!-- Comment --}}
 			<div class="form-comment">

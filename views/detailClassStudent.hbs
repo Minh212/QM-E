@@ -5,7 +5,7 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Manage Teacher</title>
+	<title>Manage Student</title>
 	<link rel="stylesheet" href="style.css">
 </head>
 
@@ -15,11 +15,11 @@
 			<div class="logo-uni">
 				<img src="/images/logo_QM.png" alt="">
 			</div>
-			<a href="/teacher">
+			<a href="/student">
 				<li>Home</li>
 			</a>
 
-			<a href="/teacher/classesTeacher">
+			<a href="/student/classesStudent">
 				<li style="background-color: #ddd;">Classes</li>
 			</a>
 		</div>
@@ -33,7 +33,7 @@
 				<img src="/images/logo-admin.png" height="50" alt="">
 				{{user.name}}
 				<div class="dropdown">
-					<a href="/teacher/profileTeacher"> Profile </a>
+					<a href="/student/profileStudent"> Profile </a>
 					<a href="/logout"> Logout </a>
 				</div>
 			</div>
@@ -59,6 +59,7 @@
 								</td>
 							</tr>
 							{{/each}}
+							
 						</tbody>
 					</table>
 				</div>

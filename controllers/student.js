@@ -43,9 +43,8 @@ router.get('/detailHWStudent', requireStudent, async (req, res) => {
     const dbo = await getDB();
     const student = await dbo.collection("Students").findOne({ userName: user.name })
     const assignment = await dbo.collection('HomeWork').findOne({ title: title });
-    const a  = student.submitAssignment
-    console.log(a);
-    res.render('detailHWStudent', {a:a, assignment: assignment, student: student })
+
+    res.render('detailHWStudent', { assignment: assignment, student: student })
 })
 
 

@@ -189,11 +189,13 @@ router.post('/addClass', requireAdmin, async (req, res) => {
     const course = req.body.course
     const allTitle = []
     const comment = []
+    const students = []
     const objectToClasses = {
         className: className,
         course: course,
         allTitle:allTitle,
-        comment:comment
+        comment:comment,
+        students:students
     }
 
     await insertObject("Classes", objectToClasses)
@@ -215,15 +217,18 @@ router.get('/addClassStudent',requireAdmin, async(req, res) => {
     const cl = await db.collection("Classes").find({}).toArray();
 
     const newClasses = []
+
     if (s.Classes == null) {
         cl.forEach(c => {
             newClasses.push(c.className)
+
         });
     } else if (!Array.isArray(s.Classes)) {
         s.Classes = [s.Classes]
         cl.forEach(c => {
             if (!s.Classes.includes(c.className)) {
                 newClasses.push(c.className)
+
             }
         });
     } else {
@@ -241,13 +246,35 @@ router.post('/addClassToStudent', async(req, res) => {
     const id = req.body.txtID;
     const classID = req.body.CS;
     const dbo = await getDB();
+    var a = classID.length
+    for (let index = 0; index < a; index++) {
+        const element = classID[index];
+        console.log(element);
+        var x = await dbo.collection("Classes").findOne({ $and: [{ className: element }, { 'students': id }] });
+        console.log(x);
+        if (x==null) {
+            await dbo.collection("Classes").updateOne({className:element}, {
+                $push:{
+                    'students': id
+                }
+            })
+            
+        } else {
+            break;
+        }
+    }
+    
+ 
     const filter = { _id: ObjectId(id) }
     const classToStudent = {
         $set: {
             Classes: classID
         }
     }
+
     await dbo.collection("Students").updateOne(filter, classToStudent)
+
+    
 
     res.redirect('/admin/manageStudent')
 })

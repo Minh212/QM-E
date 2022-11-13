@@ -141,23 +141,39 @@ router.get('/classesTeacher', requireTeacher, async (req, res) => {
 
 //Detail homework
 router.get('/detailHomework', requireTeacher, async (req, res) => {
-    const title = req.query.title;
+    const title = req.query.title
     const user = req.session["Teacher"]
     const dbo = await getDB();
     const teacher = await dbo.collection("Teachers").findOne({ userName: user.name })
-    console.log(teacher);
-    const assignment = await dbo.collection('HomeWork').findOne({ title: title });
+
+    const assignment = await dbo.collection('HomeWork').findOne({ title: title })
+    console.log(title);
     res.render('detailHomework', { assignment: assignment, teacher: teacher })
 })
 
 router.get('/detailClass', requireTeacher, async (req, res) => {
-    const user = req.session["Teacher"]
 
     const className = req.query.className;
-    const dbo = await getDB();
+    const dbo = await getDB()
     const assignment = await dbo.collection('HomeWork').find({ className: className }).toArray();
-    console.log(assignment);
+
     res.render('detailClass', { assignment: assignment, class: className });
+})
+
+router.get('/mark', requireTeacher, async (req, res) => {
+    const title = req.query.title
+    const dbo = await getDB()
+    const mark = await dbo.collection('HomeWork').findOne({ title: title })
+    console.log(mark);
+    res.render('mark', { mark: mark })
+})
+
+router.get('/scoreStudent', requireTeacher, async (req, res) => {
+    const student = req.query.student
+    const dbo = await getDB()
+
+    console.log(student);
+    res.render('scoreStudent', { student:student })
 })
 
 //Comment newspaper
