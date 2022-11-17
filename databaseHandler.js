@@ -1,8 +1,10 @@
 const async = require('hbs/lib/async');
 const { MongoClient, ObjectId } = require('mongodb');
 
-// const URL = 'mongodb+srv://1670ASM:1411@cluster0.6pxwq.mongodb.net/test';
-const URL = 'mongodb://localhost:27017';
+// const URL = "mongodb+srv://minh212:minh212212@cluster0.ijl567n.mongodb.net/QM-E?retryWrites=true&w=majority";
+
+const URL = "mongodb://0.0.0.0:27017"
+
 const DATABASE_NAME = "QM-E"
 
 async function getDB() {

@@ -176,6 +176,28 @@ router.get('/scoreStudent', requireTeacher, async (req, res) => {
     res.render('scoreStudent', { student:student })
 })
 
+router.get('/members', requireTeacher, async (req, res) => {
+    const className = req.query.className;
+    const dbo = await getDB()
+    const mem = await dbo.collection('Classes').find({ className: className }).toArray();
+    var studentM = [];
+    for (let i = 0; i < mem.length; i++) {
+        const element = mem[i].students;
+        for (let j = 0; j < element.length; j++) {
+            const student = element[j];
+            const a = await dbo.collection
+        }
+    }
+    var student = mem.students;
+    console.log(student);
+    // for (let i = 0; i < student.length; i++) {
+    //     const element = student[i];
+    //     console.log(element);
+    // }
+    res.render('members', { mem: mem, class: className });
+    
+})
+
 //Comment newspaper
 router.post("/user-comment", async (req, res) => {
     console.log("connected comment");
